@@ -22,8 +22,23 @@ export type Condition =
   | "Weakened";
 
 export type Status = "Permanent" | "End of turn" | "Save ends";
+export type Ancestry =
+  | "Devil"
+  | "Dragon Knight"
+  | "Dwarf"
+  | "Wode Elf"
+  | "High Elf"
+  | "Hakaan"
+  | "Human"
+  | "Memonek"
+  | "Orc"
+  | "Polder"
+  | "Revenant"
+  | "Time Raider";
 
 export type HeroData = {
+  name?: string;
+  ancestry?: Ancestry;
   class?: Class;
   level?: number;
   stamina: {
@@ -37,9 +52,11 @@ export type HeroData = {
     current: number;
     maximum: number;
   };
+  adventure: { victories: number; heroTokens: number };
   combat: {
     size: Size;
     speed: number;
+    disengage: number;
     stability: number;
   };
   conditions: Map<Condition, Status>;

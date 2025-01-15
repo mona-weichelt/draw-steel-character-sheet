@@ -1,43 +1,66 @@
 import { useHeroContext } from "@/hooks/useHeroContext";
 import { View, Text, Pressable } from "react-native";
+import StaticDisplay from "../data/StaticDisplay";
 
-const ValueLabel = ({ label, value }: { label: string; value: number }) => {
+const Recovery = ({ isSpent }: { isSpent: boolean }) => {
+  const active = "bg-red-600";
+  const spent = "bg-gray-600";
+  const shared = " w-2 h-3 rounded-full";
+  const style = (isSpent ? spent : active) + shared;
+  return <View className={style} />;
+};
+
+const RecoveryArray = () => {
   return (
-    <View className="flex flex-row justify-between gap-1">
-      <Text className="text-xs">{label}</Text>
-      <Text className="text-xs font-bold">{value}</Text>
+    <View className="flex flex-row flex-wrap gap-1 justify-start">
+      {[...Array(20)].map((_element, index) => {
+        return (
+          <Recovery
+            key={index}
+            isSpent={true /*index >= recoveries.current*/}
+          />
+        );
+      })}
     </View>
   );
 };
 
 const StaminaDisplay = () => {
-  const { state, dispatch } = useHeroContext();
+  const {
+    state: { stamina, recoveries },
+    dispatch,
+  } = useHeroContext();
 
   return (
-    <View className="flex flex-row bg-white rounded-lg w-fit overflow-hidden">
-      <View className="flex justify-evenly gap-2">
-        <ValueLabel label="Winded" value={state.stamina.winded} />
-        <ValueLabel label="Recovery" value={state.stamina.recovery} />
-      </View>
-      <View className="flex justify-center px-2">
-        <Text className="flex flex-1 justify-center items-center text-xl font-bold">
-          {state.stamina.current + "/" + state.stamina.maximum}
-        </Text>
-      </View>
-      <Pressable
-        className="flex bg-green-500 px-2"
+    <View className="flex flex-row rounded-lg m-2 h-20 border border-gray-400">
+      <StaticDisplay
+        className="h-full w-40 m-0 border-0 rounded-l-none"
+        value={
+          <View className="flex flex-row">
+            <Text className="flex-1 font-bold text-2xl text-right">
+              {stamina.current}
+            </Text>
+            <Text className="font-bold text-2xl">/</Text>
+            <Text className="flex-1 font-bold text-2xl">{stamina.maximum}</Text>
+          </View>
+        }
+        labelTop="stamina"
+        labelBottom={"Winded: " + stamina.winded}
+      />
+      <StaticDisplay
+        className="bg-green-500 h-full w-40 m-0 border-0 rounded-l-none"
         onPress={() => {
-          if (state.recoveries.current < 1) return;
+          if (recoveries.current < 1) return;
           dispatch({
             type: "Use Recovery",
           });
         }}
-      >
-        <ValueLabel label="Max" value={state.recoveries.maximum} />
-        <Text className="flex flex-1 justify-center items-center text-xl font-bold">
-          {state.recoveries.current}
-        </Text>
-      </Pressable>
+        value={stamina.recovery.toString()}
+        labelTop="use recovery"
+        labelBottom={
+          "Recoveries: " + recoveries.current + "/" + recoveries.maximum
+        }
+      />
     </View>
   );
 };

@@ -5,7 +5,7 @@ import { HeroProvider } from "@/hooks/useHeroContext";
 export default function RootLayout() {
   return (
     <HeroProvider>
-      <Stack>
+      <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>
     </HeroProvider>
