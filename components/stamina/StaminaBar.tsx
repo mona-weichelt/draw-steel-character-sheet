@@ -20,6 +20,8 @@ const StaminaBar = ({ className }: { className?: string }) => {
   const barWidth = percentage * 100;
   const recoveryPercentage =
     stamina.recovery / (stamina.maximum + stamina.winded);
+  const temporaryPercentage =
+    stamina.temporary / (stamina.maximum + stamina.winded);
 
   return (
     <View className={className + " p-2 m-2 border border-gray-500 rounded-lg"}>
@@ -47,18 +49,18 @@ const StaminaBar = ({ className }: { className?: string }) => {
             })}
           </View>
         </View>
-        <View className="flex-1 justify-end">
+        <View className="flex-[2_2_0%] justify-end">
           <Text className="uppercase text-xs absolute -top-4 w-full text-center font-bold text-white">
             Stamina
           </Text>
           <Text className="font-bold text-2xl text-center text-white">
-            {stamina.current}
+            {stamina.current}/{stamina.maximum}
             {stamina.temporary > 0 ? ` (+${stamina.temporary})` : ""}
           </Text>
         </View>
       </View>
       <View className="mt-2">
-        <View className="flex flex-row w-full bg-gray-600 h-4 border-2 border-gray-300 rounded-full overflow-hidden">
+        <View className="flex flex-row w-full bg-gray-600 h-1 overflow-hidden">
           <View
             className={"bg-red-700"}
             style={{
@@ -68,34 +70,50 @@ const StaminaBar = ({ className }: { className?: string }) => {
             }}
           />
           <View
-            className="flex items-center border-r-2 border-r-green-500 opacity-50"
-            style={{ width: `${recoveryPercentage * 100}%` }}
-          >
-            <Text className="text-center content-center hidden">
-              {"+" + stamina.recovery}
-            </Text>
-          </View>
+            className="h-full absolute bg-yellow-500"
+            style={{
+              width: `${temporaryPercentage * 100}%`,
+              left: `${barWidth}%`,
+              transitionProperty: "width",
+              transitionDuration: "100ms",
+            }}
+          />
           <View className="absolute left-1/3 h-full border-r-2 border-gray-300" />
           <View className="absolute left-2/3 h-full border-r-2 border-gray-300" />
+          <View
+            className="border-r-2 border-r-green-500 bg-transparent"
+            style={{ width: `${recoveryPercentage * 100}%` }}
+          />
         </View>
       </View>
       <View className="flex flex-row h-4 mt-2">
-        <View className="flex-1 flex flex-row">
-          <Text className="text-white uppercase font-bold text-xs">
+        <View className="w-0 items-start">
+          <Text className="text-white uppercase font-bold">
             -{stamina.winded}
           </Text>
-          <Text className="text-white uppercase font-bold text-xs flex-1 text-right">
-            Dying: 0
-          </Text>
         </View>
         <View className="flex-1">
-          <Text className="text-white uppercase font-bold text-xs w-full text-right">
-            Winded: {stamina.winded}
+          <Text className="text-white uppercase font-bold text-xs w-full text-center">
+            Dying
           </Text>
         </View>
+        <View className="w-0 items-center">
+          <Text className="text-white uppercase font-bold">0</Text>
+        </View>
         <View className="flex-1">
-          <Text className="text-white uppercase font-bold text-xs w-full text-right">
-            Maximum: {stamina.maximum}
+          <Text className="text-white uppercase font-bold text-xs w-full text-center">
+            Winded
+          </Text>
+        </View>
+        <View className="w-0 items-center">
+          <Text className="text-white uppercase font-bold">
+            {stamina.winded}
+          </Text>
+        </View>
+        <View className="flex-1" />
+        <View className="w-0 items-end">
+          <Text className="text-white uppercase font-bold">
+            {stamina.maximum}
           </Text>
         </View>
       </View>
