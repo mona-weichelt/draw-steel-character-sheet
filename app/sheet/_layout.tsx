@@ -9,21 +9,28 @@ export default function SheetLayout() {
   const { state, dispatch } = useHeroContext();
   return (
     <>
-      <View className="flex flex-row flex-wrap justify-between p-2 border-b">
-        <StaticDisplay
-          value={state.combat.speed + "(" + (state.combat.disengage + 1) + ")"}
-          labelBottom="speed"
-        />
-        <StaticDisplay value={state.combat.stability} labelBottom="stability" />
-        <StaticDisplay
-          value={state.adventure.heroTokens}
-          labelTop="hero"
-          labelBottom="tokens"
-        />
-        <StaticDisplay
-          value={state.adventure.victories}
-          labelBottom="victories"
-        />
+      <View className="p-2 border-b bg-gray-800 flex flex-col">
+        <View className="flex flex-row flex-wrap justify-between">
+          <StaticDisplay
+            value={
+              state.combat.speed + " (" + (state.combat.disengage + 1) + ")"
+            }
+            labelBottom="speed"
+          />
+          <StaticDisplay
+            value={state.combat.stability}
+            labelBottom="stability"
+          />
+          <StaticDisplay
+            value={state.adventure.heroTokens}
+            labelTop="hero"
+            labelBottom="tokens"
+          />
+          <StaticDisplay
+            value={state.adventure.victories}
+            labelBottom="victories"
+          />
+        </View>
         <StaminaBar />
       </View>
       <Slot screenOptions={{ headerShown: false }} />

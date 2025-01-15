@@ -40,6 +40,11 @@ const heroReducer = (state: HeroData, action: HeroDataAction) => {
         ...state,
         stamina: action.payload,
       };
+    case "Set Current Stamina":
+      return {
+        ...state,
+        stamina: { ...state.stamina, current: action.payload },
+      };
     case "Set Temporary Stamina":
       return {
         ...state,

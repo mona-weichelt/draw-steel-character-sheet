@@ -1,15 +1,16 @@
 import { useHeroContext } from "@/hooks/useHeroContext";
 import { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import Octicons from "@expo/vector-icons/Octicons";
 
 const Spacer = () => {
   return <View className="flex-1" />;
 };
 
-const StaminaBar = () => {
+const StaminaBar = ({ className }: { className?: string }) => {
   const {
     state: { stamina },
+    dispatch,
   } = useHeroContext();
 
   const percentage =
@@ -17,51 +18,89 @@ const StaminaBar = () => {
   const isWinded = stamina.current <= stamina.winded;
   const isDying = stamina.current >= 0;
   const barWidth = percentage * 100;
+  const recoveryPercentage =
+    stamina.recovery / (stamina.maximum + stamina.winded);
 
   return (
-    <View className="w-full p-4 pb-0 bg-blue-300">
-      <View className="flex flex-row">
-        <Text className="font-bold">
-          Stamina: {stamina.current} (+{stamina.temporary})
-        </Text>
+    <View className={className + " p-2 m-2 border border-gray-500 rounded-lg"}>
+      <View className="flex flex-row gap-2">
+        <View className="flex-1">
+          <Text className="font-bold text-white">
+            Stamina: {stamina.current} (+{stamina.temporary})
+          </Text>
+        </View>
+        <View className="flex-1">
+          <Text className="font-bold text-white">Recoveries</Text>
+        </View>
       </View>
-      <View className="">
+      <View className="mt-2">
         {/*<View className="absolute left-1/3 right-0 -top-6 bg-yellow-300 h-8 rounded-t-full overflow-hidden">
           <Text className="text-center h-6 bg-purple-500 align-middle">
             Temporary Stamina: {stamina.temporary}
           </Text>
         </View>*/}
-        <View className="flex flex-row w-full bg-gray-300 h-4 border rounded-full overflow-hidden">
-          <View className={"bg-red-800"} style={{ width: `${barWidth}%` }} />
-          <View className="w-20 hidden bg-green-800 flex items-center">
-            <Text className="text-center content-center">
+        <View className="flex flex-row w-full bg-gray-600 h-4 border-2 border-gray-300 rounded-full overflow-hidden">
+          <View
+            className={"bg-red-700"}
+            style={{
+              width: `${barWidth}%`,
+              transitionProperty: "width",
+              transitionDuration: "100ms",
+            }}
+          />
+          <View
+            className="hidden items-center border-r-2 border-r-green-600 opacity-50"
+            style={{ width: `${recoveryPercentage * 100}%` }}
+          >
+            <Text className="text-center content-center hidden">
               {"+" + stamina.recovery}
             </Text>
           </View>
-          <View className="flex-0 bg-gray-500" />
-          <View className="absolute left-1/3 h-full border-r" />
-          <View className="absolute left-2/3 h-full border-r" />
+          <View className="absolute left-1/3 h-full border-r-2 border-gray-300" />
+          <View className="absolute left-2/3 h-full border-r-2 border-gray-300" />
         </View>
       </View>
-      <View className="flex flex-row h-6">
-        <View className="w-0">
-          <Text className="absolute">{"-" + stamina.winded}</Text>
+      <View className="flex flex-row h-6 mt-2">
+        <View className="flex-1 flex flex-row">
+          <Text className="text-white uppercase font-bold text-xs">
+            -{stamina.winded}
+          </Text>
+          <Text className="text-white uppercase font-bold text-xs flex-1 text-right">
+            Dying: 0
+          </Text>
         </View>
-        <View className="flex-1 flex justify-start items-center">
-          <Text className="uppercase w-full text-center">Dying</Text>
+        <View className="flex-1">
+          <Text className="text-white uppercase font-bold text-xs w-full text-right">
+            Winded: {stamina.winded}
+          </Text>
         </View>
-        <View className="w-0 items-center">
-          <Text className="absolute">{"0"}</Text>
+        <View className="flex-1">
+          <Text className="text-white uppercase font-bold text-xs w-full text-right">
+            Maximum: {stamina.maximum}
+          </Text>
         </View>
-        <View className="flex-1 flex justify-start items-center">
-          <Text className="uppercase w-full text-center">Winded</Text>
+      </View>
+      <View className="flex flex-row gap-2">
+        <View className="flex-1">
+          <Pressable
+            className="h-12 items-center justify-center bg-red-600 rounded-lg"
+            onPress={() =>
+              dispatch({
+                type: "Set Stamina",
+                payload: { ...stamina, current: stamina.current - 60 },
+              })
+            }
+          >
+            <Text className="text-white font-bold">Take Damage</Text>
+          </Pressable>
         </View>
-        <View className="w-0 items-center">
-          <Text className="absolute">{stamina.winded}</Text>
-        </View>
-        <Spacer />
-        <View className="w-0 items-end">
-          <Text className="absolute">{stamina.maximum}</Text>
+        <View className="flex-1">
+          <Pressable
+            className="h-12 items-center justify-center bg-green-600 rounded-lg"
+            onPress={() => dispatch({ type: "Use Recovery" })}
+          >
+            <Text className="text-white font-bold">Use Recovery</Text>
+          </Pressable>
         </View>
       </View>
     </View>
