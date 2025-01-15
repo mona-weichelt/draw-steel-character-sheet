@@ -1,4 +1,5 @@
 import StaticDisplay from "@/components/data/StaticDisplay";
+import StaminaBar from "@/components/stamina/StaminaBar";
 import StaminaDisplay from "@/components/stamina/StaminaDisplay";
 import { useHeroContext } from "@/hooks/useHeroContext";
 import { Slot } from "expo-router";
@@ -23,7 +24,7 @@ export default function SheetLayout() {
           value={state.adventure.victories}
           labelBottom="victories"
         />
-        <StaminaDisplay />
+        <StaminaBar />
       </View>
       <Slot screenOptions={{ headerShown: false }} />
     </>
