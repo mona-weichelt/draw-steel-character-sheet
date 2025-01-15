@@ -9,7 +9,7 @@ const Spacer = () => {
 
 const StaminaBar = ({ className }: { className?: string }) => {
   const {
-    state: { stamina },
+    state: { stamina, recoveries },
     dispatch,
   } = useHeroContext();
 
@@ -24,21 +24,40 @@ const StaminaBar = ({ className }: { className?: string }) => {
   return (
     <View className={className + " p-2 m-2 border border-gray-500 rounded-lg"}>
       <View className="flex flex-row gap-2">
-        <View className="flex-1">
-          <Text className="font-bold text-white">
-            Stamina: {stamina.current} (+{stamina.temporary})
-          </Text>
+        <View className="flex-1 justify-end">
+          <View className="flex flex-row justify-between w-full">
+            <Text className="uppercase text-xs font-bold text-white mb-1">
+              Recoveries
+            </Text>
+            <Text className="uppercase text-xs font-bold text-white">
+              {recoveries.current}/{recoveries.maximum}
+            </Text>
+          </View>
+          <View className="flex flex-row flex-wrap-reverse gap-1">
+            {[...Array(recoveries.maximum)].map((_, index) => {
+              return (
+                <View
+                  className="w-2 h-2 rounded-full"
+                  style={{
+                    backgroundColor:
+                      index < recoveries.current ? "#dc2626" : "#6b7280",
+                  }}
+                />
+              );
+            })}
+          </View>
         </View>
-        <View className="flex-1">
-          <Text className="font-bold text-white">Recoveries</Text>
+        <View className="flex-1 justify-end">
+          <Text className="uppercase text-xs absolute -top-4 w-full text-center font-bold text-white">
+            Stamina
+          </Text>
+          <Text className="font-bold text-2xl text-center text-white">
+            {stamina.current}
+            {stamina.temporary > 0 ? ` (+${stamina.temporary})` : ""}
+          </Text>
         </View>
       </View>
       <View className="mt-2">
-        {/*<View className="absolute left-1/3 right-0 -top-6 bg-yellow-300 h-8 rounded-t-full overflow-hidden">
-          <Text className="text-center h-6 bg-purple-500 align-middle">
-            Temporary Stamina: {stamina.temporary}
-          </Text>
-        </View>*/}
         <View className="flex flex-row w-full bg-gray-600 h-4 border-2 border-gray-300 rounded-full overflow-hidden">
           <View
             className={"bg-red-700"}
@@ -49,7 +68,7 @@ const StaminaBar = ({ className }: { className?: string }) => {
             }}
           />
           <View
-            className="hidden items-center border-r-2 border-r-green-600 opacity-50"
+            className="flex items-center border-r-2 border-r-green-500 opacity-50"
             style={{ width: `${recoveryPercentage * 100}%` }}
           >
             <Text className="text-center content-center hidden">
@@ -60,7 +79,7 @@ const StaminaBar = ({ className }: { className?: string }) => {
           <View className="absolute left-2/3 h-full border-r-2 border-gray-300" />
         </View>
       </View>
-      <View className="flex flex-row h-6 mt-2">
+      <View className="flex flex-row h-4 mt-2">
         <View className="flex-1 flex flex-row">
           <Text className="text-white uppercase font-bold text-xs">
             -{stamina.winded}
@@ -80,14 +99,14 @@ const StaminaBar = ({ className }: { className?: string }) => {
           </Text>
         </View>
       </View>
-      <View className="flex flex-row gap-2">
+      <View className="hidden flex-row gap-2">
         <View className="flex-1">
           <Pressable
             className="h-12 items-center justify-center bg-red-600 rounded-lg"
             onPress={() =>
               dispatch({
-                type: "Set Stamina",
-                payload: { ...stamina, current: stamina.current - 60 },
+                type: "Take Damage",
+                payload: 65,
               })
             }
           >

@@ -9,7 +9,7 @@ export default function SheetLayout() {
   const { state, dispatch } = useHeroContext();
   return (
     <>
-      <View className="p-2 border-b bg-gray-800 flex flex-col">
+      <View className="p-2 border-b bg-gray-800 flex flex-col gap-2">
         <View className="flex flex-row flex-wrap justify-between">
           <StaticDisplay
             value={

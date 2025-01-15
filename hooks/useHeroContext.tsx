@@ -45,6 +45,22 @@ const heroReducer = (state: HeroData, action: HeroDataAction) => {
         ...state,
         stamina: { ...state.stamina, current: action.payload },
       };
+    case "Take Damage":
+      const newTemporaryStamina = Math.max(
+        0,
+        state.stamina.temporary - action.payload
+      );
+      const newCurrentStamina =
+        state.stamina.current -
+        Math.max(0, action.payload - state.stamina.temporary);
+      return {
+        ...state,
+        stamina: {
+          ...state.stamina,
+          current: newCurrentStamina,
+          temporary: newTemporaryStamina,
+        },
+      };
     case "Set Temporary Stamina":
       return {
         ...state,

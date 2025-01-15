@@ -65,6 +65,7 @@ export type HeroData = {
 export type HeroDataAction =
   | { type: "Set Stamina"; payload: HeroData["stamina"] }
   | { type: "Set Current Stamina"; payload: HeroData["stamina"]["current"] }
+  | { type: "Take Damage"; payload: HeroData["stamina"]["current"] }
   | {
       type: "Set Maximum Stamina";
       payload: HeroData["stamina"]["maximum"];
