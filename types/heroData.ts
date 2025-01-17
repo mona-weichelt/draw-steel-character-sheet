@@ -63,6 +63,8 @@ export type HeroData = {
 };
 
 export type HeroDataAction =
+  | { type: "Reset Short" }
+  | { type: "Reset Long" }
   | { type: "Set Stamina"; payload: HeroData["stamina"] }
   | { type: "Set Current Stamina"; payload: HeroData["stamina"]["current"] }
   | { type: "Take Damage"; payload: HeroData["stamina"]["current"] }

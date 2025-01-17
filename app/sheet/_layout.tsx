@@ -12,11 +12,35 @@ export default function SheetLayout() {
       <View className="flex flex-row gap-2 p-2">
         <View className="flex-1">
           <Pressable
+            className="h-12 items-center justify-center bg-blue-600 rounded-lg"
+            onPress={() =>
+              dispatch({
+                type: "Reset Short",
+              })
+            }
+          >
+            <Text className="text-white font-bold">Reset Short</Text>
+          </Pressable>
+        </View>
+        <View className="flex-1">
+          <Pressable
+            className="h-12 items-center justify-center bg-blue-600 rounded-lg"
+            onPress={() =>
+              dispatch({
+                type: "Reset Long",
+              })
+            }
+          >
+            <Text className="text-white font-bold">Reset Long</Text>
+          </Pressable>
+        </View>
+        <View className="flex-1">
+          <Pressable
             className="h-12 items-center justify-center bg-red-600 rounded-lg"
             onPress={() =>
               dispatch({
                 type: "Take Damage",
-                payload: 65,
+                payload: 6,
               })
             }
           >
@@ -54,7 +78,7 @@ export default function SheetLayout() {
             labelBottom="victories"
           />
         </View>
-        <StaminaBar />
+        <StaminaBar className="w-3/4 self-end" />
       </View>
       <Slot screenOptions={{ headerShown: false }} />
     </>

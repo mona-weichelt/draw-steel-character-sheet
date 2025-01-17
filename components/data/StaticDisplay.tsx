@@ -19,7 +19,7 @@ const StaticDisplay = ({
   return (
     <Pressable
       className={
-        "flex justify-center items-center w-[72px] h-12 border border-gray-500 bg-gray-700 rounded-lg m-2 " +
+        "flex justify-center items-center w-[72px] h-12 border border-gray-500 bg-gray-700 rounded-lg mb-2 " +
         className
       }
       onPress={onPress}

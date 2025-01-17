@@ -1,7 +1,31 @@
 import { Condition, HeroData, HeroDataAction, Status } from "@/types/heroData";
 import { ReactNode, createContext, useContext, useReducer } from "react";
 
-const initialState: HeroData = {
+const initialStateShort: HeroData = {
+  class: undefined,
+  level: undefined,
+  stamina: {
+    current: 16,
+    temporary: 14,
+    maximum: 30,
+    winded: 15,
+    recovery: 10,
+  },
+  recoveries: {
+    current: 6,
+    maximum: 8,
+  },
+  adventure: { victories: 6, heroTokens: 3 },
+  combat: {
+    size: 1,
+    speed: 5,
+    stability: 3,
+    disengage: 1,
+  },
+  conditions: new Map<Condition, Status>(),
+};
+
+const initialStateLong: HeroData = {
   class: undefined,
   level: undefined,
   stamina: {
@@ -29,12 +53,22 @@ const HeroContext = createContext<{
   state: HeroData;
   dispatch: React.Dispatch<HeroDataAction>;
 }>({
-  state: initialState,
+  state: initialStateLong,
   dispatch: () => {},
 });
 
 const heroReducer = (state: HeroData, action: HeroDataAction) => {
   switch (action.type) {
+    case "Reset Short":
+      return {
+        ...state,
+        ...initialStateShort,
+      };
+    case "Reset Long":
+      return {
+        ...state,
+        ...initialStateLong,
+      };
     case "Set Stamina":
       return {
         ...state,
@@ -102,7 +136,7 @@ const heroReducer = (state: HeroData, action: HeroDataAction) => {
 };
 
 export const HeroProvider = ({ children }: { children: ReactNode }) => {
-  const [state, dispatch] = useReducer(heroReducer, initialState);
+  const [state, dispatch] = useReducer(heroReducer, initialStateShort);
 
   return (
     <HeroContext.Provider value={{ state, dispatch }}>
