@@ -40,7 +40,7 @@ export default function SheetLayout() {
             onPress={() =>
               dispatch({
                 type: "Take Damage",
-                payload: 6,
+                payload: state.stamina.recovery - 1,
               })
             }
           >

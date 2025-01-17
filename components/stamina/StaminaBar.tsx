@@ -13,7 +13,7 @@ const ScaleMarker = ({
   className,
   textClassName,
 }: {
-  children: ReactNode;
+  children?: ReactNode;
   alignment?: "start" | "center" | "end";
   className?: string;
   textClassName?: string;
@@ -58,7 +58,7 @@ const SimpleScale = ({ className }: { className?: string }) => {
       <ScaleMarker className="flex-1" textClassName="text-xs">
         WINDED
       </ScaleMarker>
-      <ScaleMarker className="flex-1" alignment="end">
+      <ScaleMarker className="flex-1" textClassName="text-xs" alignment="end">
         {stamina.maximum}
       </ScaleMarker>
     </View>
@@ -96,22 +96,35 @@ const Bar = ({ className }: { className?: string }) => {
     stamina.recovery / (stamina.maximum + stamina.winded);
   const temporaryPercentage =
     stamina.temporary / (stamina.maximum + stamina.winded);
+  const isRecoveryVisible = staminaPercentage + recoveryPercentage < 1;
 
   return (
-    <View
-      className={"flex flex-row bg-gray-600 h-1 overflow-hidden " + className}
-    >
-      <BarSegment width={staminaWidth} />
-      <BarSegment width={temporaryPercentage * 100} className="bg-teal-400" />
-      <View className="absolute left-1/3 h-full border-r-2 border-white" />
-      <View className="absolute left-2/3 h-full border-r-2 border-white" />
-      <View
-        className="flex absolute h-full border-r-2 border-r-red-600 bg-transparent"
-        style={{
-          width: `${recoveryPercentage * 100}%`,
-          left: `${staminaWidth}%`,
-        }}
-      />
+    <View className={"flex-row bg-gray-600 h-1 " + className}>
+      <View className="w-full flex-row overflow-hidden">
+        <BarSegment width={staminaWidth} />
+        <BarSegment width={temporaryPercentage * 100} className="bg-teal-400" />
+      </View>
+      {isRecoveryVisible && (
+        <View className="absolute w-full h-full flex-row items-center">
+          <View
+            className="h-1 self-center"
+            style={{
+              width: `${(staminaPercentage + recoveryPercentage) * 100}%`,
+            }}
+          />
+          <ScaleMarker
+            className="w-[1px] bg-red-600 h-2"
+            textClassName="hidden"
+          />
+        </View>
+      )}
+      <View className="absolute flex-row w-full h-full items-center">
+        <Spacer />
+        <ScaleMarker className="w-[1px] bg-white h-2" textClassName="hidden" />
+        <Spacer />
+        <ScaleMarker className="w-[1px] bg-white h-2" textClassName="hidden" />
+        <Spacer />
+      </View>
     </View>
   );
 };
@@ -150,9 +163,7 @@ const Recoveries = ({ className }: { className?: string }) => {
           );
         })}
       </View>
-      <Text className="font-bold text-white min-w-[32px]">
-        +{stamina.recovery}
-      </Text>
+      <Text className="font-bold text-white">+{stamina.recovery}</Text>
     </View>
   );
 };
@@ -184,7 +195,7 @@ const StaminaBar = ({ className }: { className?: string }) => {
   return (
     <View
       className={
-        "p-2 mt-2 border border-gray-500 rounded-lg min-w-[202px] " + className
+        "p-2 pb-1 mt-2 border border-gray-500 rounded-lg w-[202px] " + className
       }
     >
       <Header />
@@ -193,8 +204,8 @@ const StaminaBar = ({ className }: { className?: string }) => {
         <View className="bg-gray-500 w-[1px] mx-2" />
         <Stamina className="flex-1" />
       </View>
-      <Bar className="mt-1" />
-      <SimpleScale className="mt-1" />
+      <Bar className="mt-2" />
+      <SimpleScale className="mt-2" />
     </View>
   );
 };

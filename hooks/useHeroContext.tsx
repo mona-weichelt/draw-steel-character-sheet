@@ -29,7 +29,7 @@ const initialStateLong: HeroData = {
   class: undefined,
   level: undefined,
   stamina: {
-    current: 169,
+    current: 51,
     temporary: 142,
     maximum: 300,
     winded: 150,
