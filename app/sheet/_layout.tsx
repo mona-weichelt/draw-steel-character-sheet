@@ -78,7 +78,7 @@ export default function SheetLayout() {
             labelBottom="victories"
           />
         </View>
-        <StaminaBar className="w-3/4 self-end" />
+        <StaminaBar className="self-end" />
       </View>
       <Slot screenOptions={{ headerShown: false }} />
     </>

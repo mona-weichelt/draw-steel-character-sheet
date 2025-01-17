@@ -1,10 +1,175 @@
 import { useHeroContext } from "@/hooks/useHeroContext";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import Octicons from "@expo/vector-icons/Octicons";
 
 const Spacer = () => {
   return <View className="flex-1" />;
+};
+
+const ScaleMarker = ({
+  children,
+  alignment = "center",
+  className,
+  textClassName,
+}: {
+  children: ReactNode;
+  alignment?: "start" | "center" | "end";
+  className?: string;
+  textClassName?: string;
+}) => {
+  return (
+    <View className={`w-0 items-${alignment} ${className}`}>
+      <Text className={"text-white uppercase font-bold " + textClassName}>
+        {children}
+      </Text>
+    </View>
+  );
+};
+
+const NumberScale = ({ className }: { className?: string }) => {
+  const {
+    state: { stamina },
+  } = useHeroContext();
+
+  return (
+    <View className={"flex flex-row h-fit " + className}>
+      <ScaleMarker alignment="start">-{stamina.winded}</ScaleMarker>
+      <Spacer />
+      <ScaleMarker>0</ScaleMarker>
+      <Spacer />
+      <ScaleMarker>{stamina.winded}</ScaleMarker>
+      <Spacer />
+      <ScaleMarker alignment="end">{stamina.maximum}</ScaleMarker>
+    </View>
+  );
+};
+
+const SimpleScale = ({ className }: { className?: string }) => {
+  const {
+    state: { stamina },
+  } = useHeroContext();
+
+  return (
+    <View className={"flex flex-row h-fit " + className}>
+      <ScaleMarker className="flex-1" textClassName="text-xs">
+        DYING
+      </ScaleMarker>
+      <ScaleMarker className="flex-1" textClassName="text-xs">
+        WINDED
+      </ScaleMarker>
+      <ScaleMarker className="flex-1" alignment="end">
+        {stamina.maximum}
+      </ScaleMarker>
+    </View>
+  );
+};
+
+const BarSegment = ({
+  className,
+  width,
+}: {
+  className?: string;
+  width: number;
+}) => {
+  return (
+    <View
+      className={"bg-blue-400 " + className}
+      style={{
+        width: `${width}%`,
+        transitionProperty: "width",
+        transitionDuration: "100ms",
+      }}
+    />
+  );
+};
+
+const Bar = ({ className }: { className?: string }) => {
+  const {
+    state: { stamina },
+  } = useHeroContext();
+
+  const staminaPercentage =
+    (stamina.current + stamina.winded) / (stamina.maximum + stamina.winded);
+  const staminaWidth = staminaPercentage * 100;
+  const recoveryPercentage =
+    stamina.recovery / (stamina.maximum + stamina.winded);
+  const temporaryPercentage =
+    stamina.temporary / (stamina.maximum + stamina.winded);
+
+  return (
+    <View
+      className={"flex flex-row bg-gray-600 h-1 overflow-hidden " + className}
+    >
+      <BarSegment width={staminaWidth} />
+      <BarSegment width={temporaryPercentage * 100} className="bg-teal-400" />
+      <View className="absolute left-1/3 h-full border-r-2 border-white" />
+      <View className="absolute left-2/3 h-full border-r-2 border-white" />
+      <View
+        className="flex absolute h-full border-r-2 border-r-red-600 bg-transparent"
+        style={{
+          width: `${recoveryPercentage * 100}%`,
+          left: `${staminaWidth}%`,
+        }}
+      />
+    </View>
+  );
+};
+
+const Header = () => {
+  return (
+    <View className="absolute -top-2 left-2 right-2 flex-row">
+      <Text className="flex-1 uppercase font-bold text-xs text-white">
+        Recoveries
+      </Text>
+      <Text className="flex-1 uppercase font-bold text-xs text-white text-right">
+        Stamina
+      </Text>
+    </View>
+  );
+};
+
+const Recoveries = ({ className }: { className?: string }) => {
+  const {
+    state: { stamina, recoveries },
+  } = useHeroContext();
+
+  return (
+    <View className={"flex-row gap-x-2 items-end " + className}>
+      <View className="w-[58px] h-[18px] flex-row flex-wrap-reverse gap-[2px]">
+        {[...Array(recoveries.maximum)].map((_, index) => {
+          return (
+            <View
+              key={index}
+              className="w-[4px] h-[8px]"
+              style={{
+                backgroundColor:
+                  index < recoveries.current ? "#dc2626" : "#6b7280",
+              }}
+            />
+          );
+        })}
+      </View>
+      <Text className="font-bold text-white min-w-[32px]">
+        +{stamina.recovery}
+      </Text>
+    </View>
+  );
+};
+
+const Stamina = ({ className }: { className?: string }) => {
+  const {
+    state: { stamina },
+  } = useHeroContext();
+
+  return (
+    <View className={"flex-row gap-x-1 justify-end items-end " + className}>
+      <Text className="font-bold text-right text-teal-400">
+        {stamina.temporary > 0 ? `(+${stamina.temporary})` : ""}
+      </Text>
+      <Text className="font-bold text-right text-white">{stamina.current}</Text>
+    </View>
+  );
 };
 
 const StaminaBar = ({ className }: { className?: string }) => {
@@ -13,133 +178,23 @@ const StaminaBar = ({ className }: { className?: string }) => {
     dispatch,
   } = useHeroContext();
 
-  const percentage =
-    (stamina.current + stamina.winded) / (stamina.maximum + stamina.winded);
   const isWinded = stamina.current <= stamina.winded;
   const isDying = stamina.current >= 0;
-  const barWidth = percentage * 100;
-  const recoveryPercentage =
-    stamina.recovery / (stamina.maximum + stamina.winded);
-  const temporaryPercentage =
-    stamina.temporary / (stamina.maximum + stamina.winded);
 
   return (
-    <View className={className + " p-2 m-2 border border-gray-500 rounded-lg"}>
-      <View className="flex flex-row gap-2">
-        <View className="flex-1 justify-end">
-          <View className="flex flex-row justify-between w-full">
-            <Text className="uppercase text-xs font-bold text-white mb-1">
-              Recoveries
-            </Text>
-            <Text className="uppercase text-xs font-bold text-white">
-              {recoveries.current}/{recoveries.maximum}
-            </Text>
-          </View>
-          <View className="flex flex-row flex-wrap-reverse gap-1">
-            {[...Array(recoveries.maximum)].map((_, index) => {
-              return (
-                <View
-                  className="w-2 h-2 rounded-full"
-                  style={{
-                    backgroundColor:
-                      index < recoveries.current ? "#dc2626" : "#6b7280",
-                  }}
-                />
-              );
-            })}
-          </View>
-        </View>
-        <View className="flex-[2_2_0%] justify-end">
-          <Text className="uppercase text-xs absolute -top-4 w-full text-center font-bold text-white">
-            Stamina
-          </Text>
-          <Text className="font-bold text-2xl text-center text-white">
-            {stamina.current}/{stamina.maximum}
-            {stamina.temporary > 0 ? ` (+${stamina.temporary})` : ""}
-          </Text>
-        </View>
+    <View
+      className={
+        "p-2 mt-2 border border-gray-500 rounded-lg min-w-[202px] " + className
+      }
+    >
+      <Header />
+      <View className="flex-row mt-1 justify-between">
+        <Recoveries />
+        <View className="bg-gray-500 w-[1px] mx-2" />
+        <Stamina className="flex-1" />
       </View>
-      <View className="mt-2">
-        <View className="flex flex-row w-full bg-gray-600 h-1 overflow-hidden">
-          <View
-            className={"bg-red-700"}
-            style={{
-              width: `${barWidth}%`,
-              transitionProperty: "width",
-              transitionDuration: "100ms",
-            }}
-          />
-          <View
-            className="h-full absolute bg-yellow-500"
-            style={{
-              width: `${temporaryPercentage * 100}%`,
-              left: `${barWidth}%`,
-              transitionProperty: "width",
-              transitionDuration: "100ms",
-            }}
-          />
-          <View className="absolute left-1/3 h-full border-r-2 border-gray-300" />
-          <View className="absolute left-2/3 h-full border-r-2 border-gray-300" />
-          <View
-            className="border-r-2 border-r-green-500 bg-transparent"
-            style={{ width: `${recoveryPercentage * 100}%` }}
-          />
-        </View>
-      </View>
-      <View className="flex flex-row h-4 mt-2">
-        <View className="w-0 items-start">
-          <Text className="text-white uppercase font-bold">
-            -{stamina.winded}
-          </Text>
-        </View>
-        <View className="flex-1">
-          <Text className="text-white uppercase font-bold text-xs w-full text-center">
-            Dying
-          </Text>
-        </View>
-        <View className="w-0 items-center">
-          <Text className="text-white uppercase font-bold">0</Text>
-        </View>
-        <View className="flex-1">
-          <Text className="text-white uppercase font-bold text-xs w-full text-center">
-            Winded
-          </Text>
-        </View>
-        <View className="w-0 items-center">
-          <Text className="text-white uppercase font-bold">
-            {stamina.winded}
-          </Text>
-        </View>
-        <View className="flex-1" />
-        <View className="w-0 items-end">
-          <Text className="text-white uppercase font-bold">
-            {stamina.maximum}
-          </Text>
-        </View>
-      </View>
-      <View className="hidden flex-row gap-2">
-        <View className="flex-1">
-          <Pressable
-            className="h-12 items-center justify-center bg-red-600 rounded-lg"
-            onPress={() =>
-              dispatch({
-                type: "Take Damage",
-                payload: 65,
-              })
-            }
-          >
-            <Text className="text-white font-bold">Take Damage</Text>
-          </Pressable>
-        </View>
-        <View className="flex-1">
-          <Pressable
-            className="h-12 items-center justify-center bg-green-600 rounded-lg"
-            onPress={() => dispatch({ type: "Use Recovery" })}
-          >
-            <Text className="text-white font-bold">Use Recovery</Text>
-          </Pressable>
-        </View>
-      </View>
+      <Bar className="mt-1" />
+      <SimpleScale className="mt-1" />
     </View>
   );
 };
