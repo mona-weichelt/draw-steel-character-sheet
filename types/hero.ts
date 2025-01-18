@@ -36,7 +36,7 @@ export type Ancestry =
   | "Revenant"
   | "Time Raider";
 
-export type HeroData = {
+export type Hero = {
   name?: string;
   ancestry?: Ancestry;
   class?: Class;
@@ -60,21 +60,28 @@ export type HeroData = {
     stability: number;
   };
   conditions: Map<Condition, Status>;
+  skills: {
+    crafting: Set<string>;
+    exploration: Set<string>;
+    interpersonal: Set<string>;
+    intrigue: Set<string>;
+    lore: Set<string>;
+  };
 };
 
-export type HeroDataAction =
+export type HeroAction =
   | { type: "Reset Short" }
   | { type: "Reset Long" }
-  | { type: "Set Stamina"; payload: HeroData["stamina"] }
-  | { type: "Set Current Stamina"; payload: HeroData["stamina"]["current"] }
-  | { type: "Take Damage"; payload: HeroData["stamina"]["current"] }
+  | { type: "Set Stamina"; payload: Hero["stamina"] }
+  | { type: "Set Current Stamina"; payload: Hero["stamina"]["current"] }
+  | { type: "Take Damage"; payload: Hero["stamina"]["current"] }
   | {
       type: "Set Maximum Stamina";
-      payload: HeroData["stamina"]["maximum"];
+      payload: Hero["stamina"]["maximum"];
     }
-  | { type: "Set Recoveries"; payload: HeroData["recoveries"] }
+  | { type: "Set Recoveries"; payload: Hero["recoveries"] }
   | { type: "Use Recovery" }
   | {
       type: "Set Temporary Stamina";
-      payload: HeroData["stamina"]["temporary"];
+      payload: Hero["stamina"]["temporary"];
     };

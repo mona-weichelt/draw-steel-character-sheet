@@ -58,7 +58,7 @@ const SimpleScale = ({ className }: { className?: string }) => {
       <ScaleMarker className="flex-1" textClassName="text-xs">
         WINDED
       </ScaleMarker>
-      <ScaleMarker className="flex-1" textClassName="text-xs" alignment="end">
+      <ScaleMarker className="flex-1" alignment="end">
         {stamina.maximum}
       </ScaleMarker>
     </View>
@@ -110,19 +110,21 @@ const Bar = ({ className }: { className?: string }) => {
             className="h-1 self-center"
             style={{
               width: `${(staminaPercentage + recoveryPercentage) * 100}%`,
+              transitionProperty: "width",
+              transitionDuration: "100ms",
             }}
           />
           <ScaleMarker
-            className="w-[1px] bg-red-600 h-2"
+            className="w-[2px] bg-red-600 h-2"
             textClassName="hidden"
           />
         </View>
       )}
       <View className="absolute flex-row w-full h-full items-center">
         <Spacer />
-        <ScaleMarker className="w-[1px] bg-white h-2" textClassName="hidden" />
+        <ScaleMarker className="w-[3px] bg-white h-2" textClassName="hidden" />
         <Spacer />
-        <ScaleMarker className="w-[1px] bg-white h-2" textClassName="hidden" />
+        <ScaleMarker className="w-[3px] bg-white h-2" textClassName="hidden" />
         <Spacer />
       </View>
     </View>
