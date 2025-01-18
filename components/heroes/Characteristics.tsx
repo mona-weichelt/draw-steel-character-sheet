@@ -3,7 +3,7 @@ import CharacteristicButton from "./CharacteristicButton";
 
 const Characteristics = () => {
   return (
-    <View className="flex flex-row bg-white justify-evenly">
+    <View className="flex flex-row justify-evenly">
       <CharacteristicButton characteristic="Might" value={2} />
       <CharacteristicButton characteristic="Agility" value={0} />
       <CharacteristicButton characteristic="Reason" value={2} />

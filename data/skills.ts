@@ -1,7 +1,10 @@
+import { Hero } from "@/types/hero";
+
 export const skills = {
   crafting: [
     "Alchemy",
     "Architecture",
+    "Blacksmithing",
     "Fletching",
     "Forgery",
     "Jewelry",
@@ -24,7 +27,7 @@ export const skills = {
     "Brag",
     "Empathize",
     "Flirt",
-    "Gambe",
+    "Gamble",
     "Handle Animals",
     "Interrogate",
     "Intimidate",
@@ -62,4 +65,14 @@ export const skills = {
     "Society",
     "Timescape",
   ],
+};
+
+export const getAllSkills = (skills: Hero["skills"]) => {
+  return new Set<string>([
+    ...skills.crafting,
+    ...skills.exploration,
+    ...skills.interpersonal,
+    ...skills.intrigue,
+    ...skills.lore,
+  ]);
 };

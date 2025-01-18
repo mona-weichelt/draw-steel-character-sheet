@@ -11,6 +11,7 @@ const sharedInitialHeroState: Pick<
   | "ancestry"
   | "name"
   | "skills"
+  | "tests"
 > = {
   name: "Tami Timi",
   class: "Censor",
@@ -25,11 +26,17 @@ const sharedInitialHeroState: Pick<
   },
   conditions: new Map<Condition, Status>(),
   skills: {
-    crafting: new Set<string>(skills.crafting),
-    exploration: new Set<string>(skills.exploration),
-    interpersonal: new Set<string>(skills.interpersonal),
-    intrigue: new Set<string>(skills.intrigue),
-    lore: new Set<string>(skills.lore),
+    crafting: new Set<string>(["Blacksmithing"]),
+    exploration: new Set<string>(["Drive", "Endurance", "Lift"]),
+    interpersonal: new Set<string>(["Brag", "Flirt", "Gamble", "Lead"]),
+    intrigue: new Set<string>(),
+    lore: new Set<string>(["Criminal Underworld", "Psionics", "Timescape"]),
+  },
+  tests: {
+    edge: new Set<string>(["Track", "Endure", "Psionics"]),
+    doubleEdge: new Set<string>(),
+    bane: new Set<string>(),
+    doubleBane: new Set<string>(),
   },
 };
 

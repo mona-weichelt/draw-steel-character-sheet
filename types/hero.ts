@@ -67,7 +67,20 @@ export type Hero = {
     intrigue: Set<string>;
     lore: Set<string>;
   };
+  tests: {
+    edge: Set<string>;
+    doubleEdge: Set<string>;
+    bane: Set<string>;
+    doubleBane: Set<string>;
+  };
 };
+
+export type SkillGroup =
+  | "crafting"
+  | "exploration"
+  | "interpersonal"
+  | "intrigue"
+  | "lore";
 
 export type HeroAction =
   | { type: "Reset Short" }
