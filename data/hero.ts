@@ -1,18 +1,7 @@
 import { Condition, Hero, Status } from "@/types/hero";
 import { skills } from "./skills";
 
-const sharedInitialHeroState: Pick<
-  Hero,
-  | "class"
-  | "level"
-  | "adventure"
-  | "combat"
-  | "conditions"
-  | "ancestry"
-  | "name"
-  | "skills"
-  | "tests"
-> = {
+const sharedInitialHeroState: Omit<Hero, "stamina" | "recoveries"> = {
   name: "Tami Timi",
   class: "Censor",
   ancestry: "Wode Elf",
@@ -38,6 +27,13 @@ const sharedInitialHeroState: Pick<
     bane: new Set<string>(),
     doubleBane: new Set<string>(),
   },
+  languages: new Set<string>([
+    "Caelian",
+    "Tholl",
+    "Zaliac",
+    "Yllyric",
+    "High Kuric",
+  ]),
 };
 
 export const initialHeroStateShort: Hero = {

@@ -73,6 +73,7 @@ export type Hero = {
     bane: Set<string>;
     doubleBane: Set<string>;
   };
+  languages: Set<string>;
 };
 
 export type SkillGroup =

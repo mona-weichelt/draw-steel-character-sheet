@@ -1,13 +1,16 @@
 import { Slot, Stack } from "expo-router";
 import "@/global.css";
 import { HeroProvider } from "@/hooks/useHeroContext";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function RootLayout() {
   return (
-    <HeroProvider>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-      </Stack>
-    </HeroProvider>
+    <GestureHandlerRootView>
+      <HeroProvider>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+        </Stack>
+      </HeroProvider>
+    </GestureHandlerRootView>
   );
 }

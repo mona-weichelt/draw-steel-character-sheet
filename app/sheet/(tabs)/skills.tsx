@@ -1,15 +1,24 @@
 import Characteristics from "@/components/heroes/Characteristics";
-import { SkillDisplay } from "@/components/skills/SkillDisplay";
+import LanguageDisplay from "@/components/skills/LanguageDisplay";
+import SkillDisplay from "@/components/skills/SkillDisplay";
+import TestResultTable from "@/components/skills/TestResultTable";
 import { View, Text } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function HeroSkills() {
   return (
-    <View className="flex-1 bg-gray-800 gap-8">
+    <ScrollView
+      className="flex flex-1 p-2 bg-gray-800"
+      contentContainerClassName="gap-8"
+    >
       <Characteristics />
-      <SkillDisplay className="p-2" />
+      <SkillDisplay />
+      <TestResultTable />
+      <LanguageDisplay />
       <Text>Wealth</Text>
       <Text>Renown</Text>
-      <Text>Languages</Text>
-    </View>
+      <Text>Wealth</Text>
+      <Text>Renown</Text>
+    </ScrollView>
   );
 }
