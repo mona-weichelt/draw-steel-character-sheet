@@ -34,6 +34,8 @@ const sharedInitialHeroState: Omit<Hero, "stamina" | "recoveries"> = {
     "Yllyric",
     "High Kuric",
   ]),
+  wealth: 3,
+  renown: 5,
 };
 
 export const initialHeroStateShort: Hero = {

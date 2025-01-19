@@ -31,14 +31,15 @@ const Column = ({
 }) => {
   return (
     <View className={"flex " + className}>
-      <Text className=" flex-1 pl-2 text-white align-middle bg-gray-700 font-bold">
+      <Text className="h-12 pl-2 text-white align-middle content-center bg-gray-700 font-bold">
         {header}
       </Text>
       {values.map((element, index) => {
         return (
           <View
+            key={index}
             className={
-              "text-white flex-1 flex-row items-center pl-2 " +
+              "text-white flex-row items-center pl-2 h-12 " +
               (index % 2 === 1 ? "bg-gray-700" : "")
             }
           >
@@ -52,16 +53,15 @@ const Column = ({
 
 const TestResultTable = () => {
   return (
-    <>
-      <View className="flex-row h-60">
+    <View className="gap-2">
+      <View className="flex-row border-b border-gray-700">
         <Column
-          className="flex-1 border-r border-gray-600"
+          className="flex-1 border-r border-gray-700"
           header="Result"
           values={[
             <Text className="text-white font-bold">Tier 1</Text>,
             <Text className="text-white font-bold">Tier 2</Text>,
             <Text className="text-white font-bold">Tier 3</Text>,
-            <Text className="text-white font-bold">Crit</Text>,
           ]}
         />
         <Column
@@ -77,11 +77,6 @@ const TestResultTable = () => {
               <Success />
               <Reward />
             </>,
-            <>
-              <Success />
-              <Reward />
-            </>,
-            ,
           ]}
         />
         <Column
@@ -94,10 +89,6 @@ const TestResultTable = () => {
               <Consequence />
             </>,
             <Success />,
-            <>
-              <Success />
-              <Reward />
-            </>,
           ]}
         />
         <Column
@@ -110,14 +101,20 @@ const TestResultTable = () => {
             </>,
             <Failure />,
             <Success />,
-            <>
-              <Success />
-              <Reward />
-            </>,
           ]}
         />
       </View>
-    </>
+      <View className="flex-row justify-evenly">
+        <View className="flex-row items-center">
+          <Reward />
+          <Text className="text-white">- with reward</Text>
+        </View>
+        <View className="flex-row items-center">
+          <Consequence />
+          <Text className="text-white">- with consequence</Text>
+        </View>
+      </View>
+    </View>
   );
 };
 

@@ -74,6 +74,8 @@ export type Hero = {
     doubleBane: Set<string>;
   };
   languages: Set<string>;
+  wealth: number;
+  renown: number;
 };
 
 export type SkillGroup =

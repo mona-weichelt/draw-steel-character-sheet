@@ -5,6 +5,7 @@ import {
   MaterialIcons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
+import { Text } from "react-native";
 
 export default function SheetLayout() {
   return (

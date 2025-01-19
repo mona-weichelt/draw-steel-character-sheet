@@ -9,12 +9,15 @@ const CharacteristicButton = ({
   characteristic: Characteristic;
 }) => {
   return (
-    <View className="flex justify-center items-center max-w-16 overflow-hidden">
-      <Text className="font-bold">
+    <View className="flex-1 p-1 pt-1 border border-gray-500 rounded-lg bg-gray-700">
+      <Text className="font-bold text-white text-xs text-center">
         {CharacteristicShorthand[characteristic]}
       </Text>
-      <Pressable className="flex justify-center items-center h-12 w-12 border-2 rounded-lg">
-        <Text>{value}</Text>
+      <Pressable className="flex-1 p-2 pt-3 flex-row justify-center items-center border border-gray-500 bg-gray-800 rounded-lg">
+        <Text className="font-bold text-2xl text-gray-500">
+          {value < 0 ? "-" : "+"}
+        </Text>
+        <Text className="font-bold text-2xl text-white">{Math.abs(value)}</Text>
       </Pressable>
     </View>
   );
