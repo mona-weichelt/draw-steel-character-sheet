@@ -1,7 +1,6 @@
 import { useHeroContext } from "@/hooks/useHeroContext";
-import { ReactNode, useEffect, useState } from "react";
-import { View, Text, Pressable } from "react-native";
-import Octicons from "@expo/vector-icons/Octicons";
+import { ReactNode } from "react";
+import { View, Text } from "react-native";
 
 const Spacer = () => {
   return <View className="flex-1" />;

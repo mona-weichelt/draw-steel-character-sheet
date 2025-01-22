@@ -1,14 +1,16 @@
 export type Characteristic =
-  | "Might"
-  | "Agility"
-  | "Reason"
-  | "Intuition"
-  | "Presence";
+  | "might"
+  | "agility"
+  | "reason"
+  | "intuition"
+  | "presence";
+
+export type Characteristics = Record<Characteristic, number>;
 
 export enum CharacteristicShorthand {
-  Might = "MGT",
-  Agility = "AGL",
-  Reason = "REA",
-  Intuition = "INU",
-  Presence = "PRS",
+  might = "MGT",
+  agility = "AGL",
+  reason = "REA",
+  intuition = "INU",
+  presence = "PRS",
 }
