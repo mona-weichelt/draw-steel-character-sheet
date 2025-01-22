@@ -1,18 +1,38 @@
+import { Ability } from "@/types/abilities";
 import { Condition, Hero, Status } from "@/types/hero";
-import { skills } from "./skills";
+import { conduitTriggered1 } from "./abilities/conduit";
+import { elementalistSignature1 } from "./abilities/elementalist";
+import { talentHeroic504 } from "./abilities/talent";
 
 const sharedInitialHeroState: Omit<Hero, "stamina" | "recoveries"> = {
   name: "Tami Timi",
   class: "Censor",
   ancestry: "Wode Elf",
   level: 1,
+  characteristics: {
+    might: 2,
+    agility: 1,
+    reason: -1,
+    intuition: 1,
+    presence: 2,
+  },
   adventure: { victories: 6, heroTokens: 3 },
   combat: {
     size: 1,
     speed: 5,
     stability: 3,
     disengage: 1,
+    heroicResource: {
+      name: "Zeal",
+      amount: 0,
+    },
+    surges: 0,
   },
+  abilities: new Set<Ability>([
+    elementalistSignature1,
+    talentHeroic504,
+    conduitTriggered1,
+  ]),
   conditions: new Map<Condition, Status>(),
   skills: {
     crafting: new Set<string>(["Blacksmithing"]),

@@ -1,3 +1,6 @@
+import { Ability } from "./abilities";
+import { Characteristics } from "./core";
+
 export type Class =
   | "Censor"
   | "Conduit"
@@ -41,6 +44,7 @@ export type Hero = {
   ancestry?: Ancestry;
   class?: Class;
   level?: number;
+  characteristics: Characteristics;
   stamina: {
     current: number;
     temporary: number;
@@ -58,7 +62,13 @@ export type Hero = {
     speed: number;
     disengage: number;
     stability: number;
+    heroicResource: {
+      name: string;
+      amount: number;
+    };
+    surges: number;
   };
+  abilities: Set<Ability>;
   conditions: Map<Condition, Status>;
   skills: {
     crafting: Set<string>;
