@@ -1,6 +1,6 @@
 import { useHeroContext } from "@/hooks/useHeroContext";
-import { ReactNode } from "react";
-import { View, Text } from "react-native";
+import React, { ReactNode } from "react";
+import { Text, View } from "react-native";
 
 const Spacer = () => {
   return <View className="flex-1" />;
@@ -26,7 +26,8 @@ const ScaleMarker = ({
   );
 };
 
-const NumberScale = ({ className }: { className?: string }) => {
+// An alternative scale for the stamina bar. Not used in teh current design, but the code is functional.
+/* const NumberScale = ({ className }: { className?: string }) => {
   const {
     state: { stamina },
   } = useHeroContext();
@@ -42,7 +43,7 @@ const NumberScale = ({ className }: { className?: string }) => {
       <ScaleMarker alignment="end">{stamina.maximum}</ScaleMarker>
     </View>
   );
-};
+}; */
 
 const SimpleScale = ({ className }: { className?: string }) => {
   const {
@@ -185,13 +186,13 @@ const Stamina = ({ className }: { className?: string }) => {
 };
 
 const StaminaBar = ({ className }: { className?: string }) => {
-  const {
-    state: { stamina, recoveries },
-    dispatch,
-  } = useHeroContext();
+  /*   const {
+    state: { stamina },
+  } = useHeroContext(); */
 
-  const isWinded = stamina.current <= stamina.winded;
-  const isDying = stamina.current >= 0;
+  // TODO: add highlight for winded and dying states to stamina bar
+  // const isWinded = stamina.current <= stamina.winded;
+  // const isDying = stamina.current >= 0;
 
   return (
     <View

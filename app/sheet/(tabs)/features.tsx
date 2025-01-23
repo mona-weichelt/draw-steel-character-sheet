@@ -1,8 +1,7 @@
-import { useHeroContext } from "@/hooks/useHeroContext";
-import { View, Text } from "react-native";
+import React from "react";
+import { Text, View } from "react-native";
 
 export default function HeroFeatures() {
-  const { state, dispatch } = useHeroContext();
   return (
     <View>
       <Text>Class Features</Text>

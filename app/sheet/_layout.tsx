@@ -1,9 +1,9 @@
 import StaticDisplay from "@/components/data/StaticDisplay";
 import StaminaBar from "@/components/stamina/StaminaBar";
-import StaminaDisplay from "@/components/stamina/StaminaDisplay";
 import { useHeroContext } from "@/hooks/useHeroContext";
 import { Slot } from "expo-router";
-import { View, Text, Pressable } from "react-native";
+import React from "react";
+import { Pressable, Text, View } from "react-native";
 
 export default function SheetLayout() {
   const { state, dispatch } = useHeroContext();

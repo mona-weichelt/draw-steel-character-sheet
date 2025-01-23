@@ -1,5 +1,5 @@
-import { Ability, AbilityKeyword, DistanceType } from "@/types/abilities";
-import { Characteristic, Characteristics } from "@/types/core";
+import { Ability, AbilityKeyword } from "@/types/abilities";
+import { Characteristic } from "@/types/core";
 
 export const elementalistSignature1: Ability = (
   characteristics,

@@ -1,5 +1,5 @@
-import { ReactNode, useState } from "react";
-import { Pressable, View, Text } from "react-native";
+import React, { ReactNode } from "react";
+import { Pressable, Text, View } from "react-native";
 
 const MenuEntry = ({
   containerClassName,

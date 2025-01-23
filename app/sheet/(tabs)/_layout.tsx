@@ -1,11 +1,11 @@
-import { Tabs } from "expo-router";
 import {
   FontAwesome5,
   Ionicons,
-  MaterialIcons,
   MaterialCommunityIcons,
+  MaterialIcons,
 } from "@expo/vector-icons";
-import { Text } from "react-native";
+import { Tabs } from "expo-router";
+import React from "react";
 
 export default function SheetLayout() {
   return (

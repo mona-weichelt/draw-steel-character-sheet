@@ -1,3 +1,4 @@
+import React from "react";
 import { useHeroContext } from "@/hooks/useHeroContext";
 import { View, Text } from "react-native";
 import { getAllSkills } from "@/data/skills";

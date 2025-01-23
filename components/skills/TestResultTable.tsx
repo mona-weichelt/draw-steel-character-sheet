@@ -1,8 +1,7 @@
-import { testResults } from "@/data/tests";
-import { View, Text } from "react-native";
+import React from "react";
 import Entypo from "@expo/vector-icons/Entypo";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { ReactNode } from "react";
+import { Text, View } from "react-native";
 
 const Reward = () => {
   return <Entypo name="arrow-up" size={24} color="limegreen" />;
@@ -59,9 +58,15 @@ const TestResultTable = () => {
           className="flex-1 border-r border-gray-700"
           header="Result"
           values={[
-            <Text className="text-white font-bold">Tier 1</Text>,
-            <Text className="text-white font-bold">Tier 2</Text>,
-            <Text className="text-white font-bold">Tier 3</Text>,
+            <Text key={"tier1"} className="text-white font-bold">
+              Tier 1
+            </Text>,
+            <Text key={"tier2"} className="text-white font-bold">
+              Tier 2
+            </Text>,
+            <Text key={"tier3"} className="text-white font-bold">
+              Tier 3
+            </Text>,
           ]}
         />
         <Column
@@ -69,13 +74,13 @@ const TestResultTable = () => {
           header="Easy"
           values={[
             <>
-              <Success />
-              <Consequence />
+              <Success key={"easy-tier1-1"} />
+              <Consequence key={"easy-tier1-2"} />
             </>,
-            <Success />,
+            <Success key={"easy-tier2-1"} />,
             <>
-              <Success />
-              <Reward />
+              <Success key={"easy-tier3-1"} />
+              <Reward key={"easy-tier3-2"} />
             </>,
           ]}
         />
@@ -83,12 +88,12 @@ const TestResultTable = () => {
           className="flex-1"
           header="Medium"
           values={[
-            <Failure />,
+            <Failure key={"medium-tier1-1"} />,
             <>
-              <Success />
-              <Consequence />
+              <Success key={"medium-tier2-1"} />
+              <Consequence key={"medium-tier2-2"} />
             </>,
-            <Success />,
+            <Success key={"medium-tier3-1"} />,
           ]}
         />
         <Column
@@ -96,11 +101,11 @@ const TestResultTable = () => {
           header="Hard"
           values={[
             <>
-              <Failure />
-              <Consequence />
+              <Failure key={"hard-tier1-1"} />
+              <Consequence key={"hard-tier1-2"} />
             </>,
-            <Failure />,
-            <Success />,
+            <Failure key={"hard-tier2-1"} />,
+            <Success key={"hard-tier3-1"} />,
           ]}
         />
       </View>

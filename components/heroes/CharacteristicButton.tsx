@@ -1,5 +1,6 @@
+import React from "react";
 import { Characteristic, CharacteristicShorthand } from "@/types/core";
-import { View, Text, Button, Pressable } from "react-native";
+import { Pressable, Text, View } from "react-native";
 
 const CharacteristicButton = ({
   value,

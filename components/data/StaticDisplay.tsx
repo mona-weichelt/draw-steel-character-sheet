@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { Text, Pressable, View } from "react-native";
+import React, { ReactNode } from "react";
+import { Pressable, Text, View } from "react-native";
 
 const StaticDisplay = ({
   value,

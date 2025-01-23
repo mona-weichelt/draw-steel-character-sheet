@@ -1,5 +1,4 @@
-import { Ability, AbilityKeyword, DistanceType } from "@/types/abilities";
-import { Characteristic } from "@/types/core";
+import { Ability, AbilityKeyword } from "@/types/abilities";
 
 export const talentHeroic504: Ability = () => {
   return {

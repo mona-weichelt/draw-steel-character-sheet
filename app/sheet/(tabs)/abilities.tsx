@@ -1,6 +1,7 @@
 import StaticDisplay from "@/components/data/StaticDisplay";
 import { useHeroContext } from "@/hooks/useHeroContext";
-import { View, Text } from "react-native";
+import React from "react";
+import { Text, View } from "react-native";
 
 export default function HeroAbilities() {
   const {

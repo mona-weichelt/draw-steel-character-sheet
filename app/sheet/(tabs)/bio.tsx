@@ -1,8 +1,9 @@
 import { useHeroContext } from "@/hooks/useHeroContext";
-import { View, Text } from "react-native";
+import React from "react";
+import { Text, View } from "react-native";
 
 export default function HeroABio() {
-  const { state, dispatch } = useHeroContext();
+  const { state } = useHeroContext();
   return (
     <View>
       <Text>Character Name: {state.name}</Text>

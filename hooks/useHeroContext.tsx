@@ -1,6 +1,6 @@
 import { initialHeroStateLong, initialHeroStateShort } from "@/data/hero";
-import { Condition, Hero, HeroAction, Status } from "@/types/hero";
-import { ReactNode, createContext, useContext, useReducer } from "react";
+import { Hero, HeroAction } from "@/types/hero";
+import React, { ReactNode, createContext, useContext, useReducer } from "react";
 
 const HeroContext = createContext<{
   state: Hero;
@@ -33,19 +33,14 @@ const heroReducer = (state: Hero, action: HeroAction) => {
         stamina: { ...state.stamina, current: action.payload },
       };
     case "Take Damage":
-      const newTemporaryStamina = Math.max(
-        0,
-        state.stamina.temporary - action.payload
-      );
-      const newCurrentStamina =
-        state.stamina.current -
-        Math.max(0, action.payload - state.stamina.temporary);
       return {
         ...state,
         stamina: {
           ...state.stamina,
-          current: newCurrentStamina,
-          temporary: newTemporaryStamina,
+          current:
+            state.stamina.current -
+            Math.max(0, action.payload - state.stamina.temporary),
+          temporary: Math.max(0, state.stamina.temporary - action.payload),
         },
       };
     case "Set Temporary Stamina":
