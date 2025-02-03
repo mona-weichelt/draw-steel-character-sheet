@@ -1,4 +1,3 @@
-import MaterialBottomTabs from "@/layouts/MaterialBottomTabs";
 import MaterialTopTabs from "@/layouts/MaterialTopTabs";
 import {
   FontAwesome5,
@@ -10,7 +9,7 @@ import React from "react";
 
 export default function SheetLayout() {
   return (
-    <MaterialBottomTabs screenOptions={{sceneStyle: {backgroundColor: "#1f2937"}}}>
+    <MaterialTopTabs tabBarPosition="bottom"  screenOptions={{sceneStyle: {backgroundColor: "#1f2937"}, tabBarLabelStyle: {fontSize: 12}}}>
       <MaterialTopTabs.Screen
         name="skills"
         options={{
@@ -56,6 +55,6 @@ export default function SheetLayout() {
           ),
         }}
       />
-    </MaterialBottomTabs>
+    </MaterialTopTabs>
   );
 }
