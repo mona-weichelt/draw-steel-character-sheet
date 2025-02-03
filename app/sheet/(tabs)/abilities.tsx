@@ -9,7 +9,9 @@ export default function HeroAbilities() {
   } = useHeroContext();
 
   return (
-    <View className="flex-1 bg-gray-800 pt-4">
+    <View
+      className="flex flex-col"
+    >
       <View className="flex-row">
         <StaticDisplay
           value={combat.heroicResource.amount}

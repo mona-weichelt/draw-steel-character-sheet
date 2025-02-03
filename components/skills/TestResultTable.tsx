@@ -50,9 +50,9 @@ const Column = ({
   );
 };
 
-const TestResultTable = () => {
+const TestResultTable = ({ className }: { className?: string }) => {
   return (
-    <View className="gap-2">
+    <View className={"gap-2 " + className}>
       <View className="flex-row border-b border-gray-700">
         <Column
           className="flex-1 border-r border-gray-700"
