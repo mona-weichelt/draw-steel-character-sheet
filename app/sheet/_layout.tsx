@@ -56,7 +56,7 @@ export default function SheetLayout() {
           </Pressable>
         </View>
       </View>
-      <View className="p-2 border-b border-b-gray-500 bg-gray-800 flex flex-col gap-2">
+      <View className="p-2 border-b bg-gray-800 border-b-gray-500 flex flex-col gap-2">
         <View className="flex flex-row flex-wrap justify-between">
           <StaticDisplay
             value={
@@ -80,7 +80,7 @@ export default function SheetLayout() {
         </View>
         <StaminaBar className="self-end w-3/4" />
       </View>
-      <Slot screenOptions={{ headerShown: false }} />
+        <Slot screenOptions={{ headerShown: false }} />
     </>
   );
 }

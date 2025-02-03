@@ -1,3 +1,4 @@
+import MaterialTopTabs from "@/layouts/MaterialTopTabs";
 import {
   FontAwesome5,
   Ionicons,
@@ -9,8 +10,8 @@ import React from "react";
 
 export default function SheetLayout() {
   return (
-    <Tabs screenOptions={{ headerShown: false }}>
-      <Tabs.Screen
+    <MaterialTopTabs screenOptions={{sceneStyle: {backgroundColor: "#1f2937"}}}>
+      <MaterialTopTabs.Screen
         name="skills"
         options={{
           title: "Skills",
@@ -19,7 +20,7 @@ export default function SheetLayout() {
           ),
         }}
       />
-      <Tabs.Screen
+      <MaterialTopTabs.Screen
         name="abilities"
         options={{
           title: "Abilities",
@@ -28,7 +29,7 @@ export default function SheetLayout() {
           ),
         }}
       />
-      <Tabs.Screen
+      <MaterialTopTabs.Screen
         name="features"
         options={{
           title: "Features",
@@ -37,7 +38,7 @@ export default function SheetLayout() {
           ),
         }}
       />
-      <Tabs.Screen
+      <MaterialTopTabs.Screen
         name="projects"
         options={{
           title: "Projects",
@@ -46,7 +47,7 @@ export default function SheetLayout() {
           ),
         }}
       />
-      <Tabs.Screen
+      <MaterialTopTabs.Screen
         name="bio"
         options={{
           title: "Bio",
@@ -55,6 +56,6 @@ export default function SheetLayout() {
           ),
         }}
       />
-    </Tabs>
+    </MaterialTopTabs>
   );
 }
