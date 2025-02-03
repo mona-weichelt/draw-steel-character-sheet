@@ -1,3 +1,4 @@
+import MaterialBottomTabs from "@/layouts/MaterialBottomTabs";
 import MaterialTopTabs from "@/layouts/MaterialTopTabs";
 import {
   FontAwesome5,
@@ -5,12 +6,11 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
 import React from "react";
 
 export default function SheetLayout() {
   return (
-    <MaterialTopTabs screenOptions={{sceneStyle: {backgroundColor: "#1f2937"}}}>
+    <MaterialBottomTabs screenOptions={{sceneStyle: {backgroundColor: "#1f2937"}}}>
       <MaterialTopTabs.Screen
         name="skills"
         options={{
@@ -56,6 +56,6 @@ export default function SheetLayout() {
           ),
         }}
       />
-    </MaterialTopTabs>
+    </MaterialBottomTabs>
   );
 }
