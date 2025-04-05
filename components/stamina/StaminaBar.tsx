@@ -11,20 +11,22 @@ const ScaleMarker = ({
   alignment = "center",
   className,
   textClassName,
+  ...rest
 }: {
   children?: ReactNode;
   alignment?: "start" | "center" | "end";
   className?: string;
   textClassName?: string;
+  [x: string]: unknown;
 }) => {
   return (
-    <View className={`w-0 items-${alignment} ${className}`}>
+    <View className={`w-0 items-${alignment} ${className}`} {...rest}>
       <Text className={"uppercase font-bold " + textClassName}>{children}</Text>
     </View>
   );
 };
 
-// An alternative scale for the stamina bar. Not used in teh current design, but the code is functional.
+// An alternative scale for the stamina bar. Not used in the current design, but the code is functional.
 /* const NumberScale = ({ className }: { className?: string }) => {
   const {
     state: { stamina },
@@ -48,12 +50,23 @@ const SimpleScale = ({ className }: { className?: string }) => {
     state: { stamina },
   } = useHeroContext();
 
+  const isDying = stamina.current <= 0;
+  const isWinded = stamina.current <= stamina.winded;
+
   return (
     <View className={"flex flex-row h-fit " + className}>
-      <ScaleMarker className="flex-1" textClassName="text-xs text-foreground">
+      <ScaleMarker
+        className="flex-1"
+        textClassName={"text-xs " + (isDying ? "text-negative" : "text-muted")}
+      >
         DYING
       </ScaleMarker>
-      <ScaleMarker className="flex-1" textClassName="text-xs text-foreground">
+      <ScaleMarker
+        className="flex-1"
+        textClassName={
+          "text-xs " + (isWinded && !isDying ? "text-negative" : "text-muted")
+        }
+      >
         WINDED
       </ScaleMarker>
       <ScaleMarker
@@ -76,7 +89,7 @@ const BarSegment = ({
 }) => {
   return (
     <View
-      className={"bg-stamina " + className}
+      className={className}
       style={{
         width: `${width}%`,
         transitionProperty: "width",
@@ -91,37 +104,36 @@ const Bar = ({ className }: { className?: string }) => {
     state: { stamina },
   } = useHeroContext();
 
-  const staminaPercentage =
-    (stamina.current + stamina.winded) / (stamina.maximum + stamina.winded);
-  const staminaWidth = staminaPercentage * 100;
+  const staminaPercentage = Math.max(
+    (stamina.current + stamina.winded) / (stamina.maximum + stamina.winded),
+    0
+  );
   const recoveryPercentage =
     stamina.recovery / (stamina.maximum + stamina.winded);
   const temporaryPercentage =
     stamina.temporary / (stamina.maximum + stamina.winded);
-  const isRecoveryVisible = staminaPercentage + recoveryPercentage < 1;
+  //const isRecoveryVisible = staminaPercentage + recoveryPercentage < 1;
 
   return (
     <View className={"flex-row bg-muted h-1 " + className}>
       <View className="w-full flex-row overflow-hidden">
-        <BarSegment width={staminaWidth} />
+        <BarSegment width={staminaPercentage * 100} className="bg-stamina" />
         <BarSegment width={temporaryPercentage * 100} className="bg-resolve" />
       </View>
-      {isRecoveryVisible && (
-        <View className="absolute w-full h-full flex-row items-center">
-          <View
-            className="h-1 self-center"
-            style={{
-              width: `${(staminaPercentage + recoveryPercentage) * 100}%`,
-              transitionProperty: "width",
-              transitionDuration: "100ms",
-            }}
-          />
-          <ScaleMarker
-            className="w-[2px] bg-recovery h-2"
-            textClassName="hidden"
-          />
-        </View>
-      )}
+      <View className="absolute w-full h-full flex-row items-center">
+        <View
+          className="h-1 self-center"
+          style={{
+            width: `${(staminaPercentage + recoveryPercentage) * 100}%`,
+            transitionProperty: "width",
+            transitionDuration: "100ms",
+          }}
+        />
+        <ScaleMarker
+          className="w-[2px] bg-recovery h-2"
+          textClassName="hidden"
+        />
+      </View>
       <View className="absolute flex-row w-full h-full items-center">
         <Spacer />
         <ScaleMarker

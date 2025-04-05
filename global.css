@@ -10,7 +10,7 @@
   --recovery: #dc2626;
   --stamina: #60a5fa;
   --resolve: #2dd4bf;
-  --positive: #32cd32;
+  --positive: #60a5fa;
   --negative: #dc2626;
 }
 
@@ -23,7 +23,7 @@
     --recovery: #dc2626;
     --stamina: #60a5fa;
     --resolve: #2dd4bf;
-    --positive: #32cd32;
+    --positive: #60a5fa;
     --negative: #dc2626;
   }
 }
