@@ -187,7 +187,7 @@ const Stamina = ({ className }: { className?: string }) => {
 
   return (
     <View className={"flex-row gap-x-1 justify-end items-end " + className}>
-      <Text className="font-bold text-right text-teal-400">
+      <Text className="font-bold text-right text-resolve">
         {stamina.temporary > 0 ? `(+${stamina.temporary})` : ""}
       </Text>
       <Text className="text-foreground font-bold text-right">

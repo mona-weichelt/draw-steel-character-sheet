@@ -8,7 +8,11 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView>
       <HeroProvider>
-        <Stack screenOptions={{ headerShown: false }}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
           <Stack.Screen name="index" options={{ headerShown: false }} />
         </Stack>
       </HeroProvider>

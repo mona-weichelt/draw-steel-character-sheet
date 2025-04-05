@@ -11,7 +11,7 @@ module.exports = {
         muted: "var(--muted)",
         recovery: "var(--recovery)",
         stamina: "var(--stamina)",
-        resolve: "var(--stamina)",
+        resolve: "var(--resolve)",
         positive: "var(--positive)",
         negative: "var(--negative)",
       },

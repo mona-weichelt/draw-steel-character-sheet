@@ -12,8 +12,13 @@ export default function SheetLayout() {
     <MaterialTopTabs
       tabBarPosition="bottom"
       screenOptions={{
-        sceneStyle: { backgroundColor: "#1f2937" },
-        tabBarLabelStyle: { fontSize: 12 },
+        tabBarStyle: {
+          backgroundColor: "var(--base)",
+          borderTopColor: "var(--muted)",
+          borderTopWidth: "1px",
+        },
+        tabBarLabelStyle: { fontSize: 12, color: "var(--foreground)" },
+        sceneStyle: { backgroundColor: "var(--base)" },
       }}
     >
       <MaterialTopTabs.Screen
@@ -21,7 +26,11 @@ export default function SheetLayout() {
         options={{
           title: "Skills",
           tabBarIcon: () => (
-            <Ionicons name="sparkles-outline" size={24} color="black" />
+            <Ionicons
+              name="sparkles-outline"
+              size={24}
+              color="var(--foreground)"
+            />
           ),
         }}
       />
@@ -30,7 +39,11 @@ export default function SheetLayout() {
         options={{
           title: "Abilities",
           tabBarIcon: () => (
-            <MaterialCommunityIcons name="sword" size={24} color="black" />
+            <MaterialCommunityIcons
+              name="sword"
+              size={24}
+              color="var(--foreground)"
+            />
           ),
         }}
       />
@@ -39,7 +52,11 @@ export default function SheetLayout() {
         options={{
           title: "Features",
           tabBarIcon: () => (
-            <Ionicons name="person-circle-outline" size={24} color="black" />
+            <Ionicons
+              name="person-circle-outline"
+              size={24}
+              color="var(--foreground)"
+            />
           ),
         }}
       />
@@ -48,7 +65,11 @@ export default function SheetLayout() {
         options={{
           title: "Projects",
           tabBarIcon: () => (
-            <MaterialIcons name="schedule" size={24} color="black" />
+            <MaterialIcons
+              name="schedule"
+              size={24}
+              color="var(--foreground)"
+            />
           ),
         }}
       />
@@ -57,7 +78,7 @@ export default function SheetLayout() {
         options={{
           title: "Bio",
           tabBarIcon: () => (
-            <FontAwesome5 name="book" size={24} color="black" />
+            <FontAwesome5 name="book" size={24} color="var(--foreground)" />
           ),
         }}
       />
