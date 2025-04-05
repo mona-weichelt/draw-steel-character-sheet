@@ -4,19 +4,19 @@ import { ReactNode } from "react";
 import { Text, View } from "react-native";
 
 const Reward = () => {
-  return <Entypo name="arrow-up" size={24} color="limegreen" />;
+  return <Entypo name="arrow-up" size={24} color="var(--positive)" />;
 };
 
 const Consequence = () => {
-  return <Entypo name="arrow-down" size={24} color="red" />;
+  return <Entypo name="arrow-down" size={24} color="var(--negative)" />;
 };
 
 const Success = () => {
-  return <Text className="text-white">Success</Text>;
+  return <Text className="text-foreground">Success</Text>;
 };
 
 const Failure = () => {
-  return <Text className="text-white">Failure</Text>;
+  return <Text className="text-foreground">Failure</Text>;
 };
 
 const Column = ({
@@ -30,7 +30,7 @@ const Column = ({
 }) => {
   return (
     <View className={"flex " + className}>
-      <Text className="h-12 pl-2 text-white align-middle content-center bg-gray-700 font-bold">
+      <Text className="h-12 pl-2 text-foreground align-middle content-center font-bold">
         {header}
       </Text>
       {values.map((element, index) => {
@@ -38,8 +38,8 @@ const Column = ({
           <View
             key={index}
             className={
-              "text-white flex-row items-center pl-2 h-12 " +
-              (index % 2 === 1 ? "bg-gray-700" : "")
+              "flex-row items-center pl-2 h-12 " +
+              (index % 2 === 1 ? "bg-background" : "")
             }
           >
             {element}
@@ -53,18 +53,18 @@ const Column = ({
 const TestResultTable = ({ className }: { className?: string }) => {
   return (
     <View className={"gap-2 " + className}>
-      <View className="flex-row border-b border-gray-700">
+      <View className="flex-row border-b border-background">
         <Column
-          className="flex-1 border-r border-gray-700"
+          className="flex-1 border-r border-background"
           header="Result"
           values={[
-            <Text key={"tier1"} className="text-white font-bold">
+            <Text key={"tier1"} className="font-bold text-foreground">
               Tier 1
             </Text>,
-            <Text key={"tier2"} className="text-white font-bold">
+            <Text key={"tier2"} className="font-bold text-foreground">
               Tier 2
             </Text>,
-            <Text key={"tier3"} className="text-white font-bold">
+            <Text key={"tier3"} className="font-bold text-foreground">
               Tier 3
             </Text>,
           ]}
@@ -112,11 +112,11 @@ const TestResultTable = ({ className }: { className?: string }) => {
       <View className="flex-row justify-evenly">
         <View className="flex-row items-center">
           <Reward />
-          <Text className="text-white">- with reward</Text>
+          <Text className="text-foreground">- with reward</Text>
         </View>
         <View className="flex-row items-center">
           <Consequence />
-          <Text className="text-white">- with consequence</Text>
+          <Text className="text-foreground">- with consequence</Text>
         </View>
       </View>
     </View>

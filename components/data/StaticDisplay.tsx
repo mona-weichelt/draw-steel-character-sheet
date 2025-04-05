@@ -17,15 +17,15 @@ const StaticDisplay = ({
   onPress?: () => void;
 }) => {
   const textStyle: string =
-    "uppercase text-white font-bold text-xs absolute rounded-lg min-w-20 w-full text-center";
+    "uppercase font-bold text-foreground text-xs absolute rounded-lg min-w-20 w-full text-center";
   return (
     <Pressable
       className={"flex-row items-center " + className}
       onPress={onPress}
     >
-      <View className="flex justify-center items-center w-[72px] h-12 border border-gray-500 bg-gray-700 rounded-lg">
+      <View className="flex justify-center items-center w-[72px] h-12 border border-muted rounded-lg">
         {labelTop && <Text className={textStyle + " -top-2"}>{labelTop}</Text>}
-        <Text className="uppercase text-white w-full text-center font-bold text-2xl rounded-lg">
+        <Text className="uppercase w-full text-center font-bold text-foreground text-2xl rounded-lg">
           {value}
         </Text>
         {labelBottom && (
@@ -33,8 +33,8 @@ const StaticDisplay = ({
         )}
       </View>
       {labelRight && (
-        <View className="flex-1 bg-gray-700 border border-l-0 border-gray-500 rounded-r-lg p-1 pr-2">
-          <Text className={"text-white text-wrap"}>{labelRight}</Text>
+        <View className="flex-1 border border-l-0 border-muted rounded-r-lg p-1 pr-2">
+          <Text className={"text-wrap"}>{labelRight}</Text>
         </View>
       )}
     </Pressable>

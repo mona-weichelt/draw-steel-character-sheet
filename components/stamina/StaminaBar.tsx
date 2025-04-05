@@ -19,9 +19,7 @@ const ScaleMarker = ({
 }) => {
   return (
     <View className={`w-0 items-${alignment} ${className}`}>
-      <Text className={"text-white uppercase font-bold " + textClassName}>
-        {children}
-      </Text>
+      <Text className={"uppercase font-bold " + textClassName}>{children}</Text>
     </View>
   );
 };
@@ -52,13 +50,17 @@ const SimpleScale = ({ className }: { className?: string }) => {
 
   return (
     <View className={"flex flex-row h-fit " + className}>
-      <ScaleMarker className="flex-1" textClassName="text-xs">
+      <ScaleMarker className="flex-1" textClassName="text-xs text-foreground">
         DYING
       </ScaleMarker>
-      <ScaleMarker className="flex-1" textClassName="text-xs">
+      <ScaleMarker className="flex-1" textClassName="text-xs text-foreground">
         WINDED
       </ScaleMarker>
-      <ScaleMarker className="flex-1" alignment="end">
+      <ScaleMarker
+        className="flex-1"
+        textClassName="text-foreground"
+        alignment="end"
+      >
         {stamina.maximum}
       </ScaleMarker>
     </View>
@@ -74,7 +76,7 @@ const BarSegment = ({
 }) => {
   return (
     <View
-      className={"bg-blue-400 " + className}
+      className={"bg-stamina " + className}
       style={{
         width: `${width}%`,
         transitionProperty: "width",
@@ -99,10 +101,10 @@ const Bar = ({ className }: { className?: string }) => {
   const isRecoveryVisible = staminaPercentage + recoveryPercentage < 1;
 
   return (
-    <View className={"flex-row bg-gray-600 h-1 " + className}>
+    <View className={"flex-row bg-muted h-1 " + className}>
       <View className="w-full flex-row overflow-hidden">
         <BarSegment width={staminaWidth} />
-        <BarSegment width={temporaryPercentage * 100} className="bg-teal-400" />
+        <BarSegment width={temporaryPercentage * 100} className="bg-resolve" />
       </View>
       {isRecoveryVisible && (
         <View className="absolute w-full h-full flex-row items-center">
@@ -115,16 +117,22 @@ const Bar = ({ className }: { className?: string }) => {
             }}
           />
           <ScaleMarker
-            className="w-[2px] bg-red-600 h-2"
+            className="w-[2px] bg-recovery h-2"
             textClassName="hidden"
           />
         </View>
       )}
       <View className="absolute flex-row w-full h-full items-center">
         <Spacer />
-        <ScaleMarker className="w-[3px] bg-white h-2" textClassName="hidden" />
+        <ScaleMarker
+          className="w-[3px] bg-foreground h-2"
+          textClassName="hidden"
+        />
         <Spacer />
-        <ScaleMarker className="w-[3px] bg-white h-2" textClassName="hidden" />
+        <ScaleMarker
+          className="w-[3px] bg-foreground h-2"
+          textClassName="hidden"
+        />
         <Spacer />
       </View>
     </View>
@@ -134,10 +142,10 @@ const Bar = ({ className }: { className?: string }) => {
 const Header = () => {
   return (
     <View className="absolute -top-2 left-2 right-2 flex-row">
-      <Text className="flex-1 uppercase font-bold text-xs text-white">
+      <Text className="flex-1 text-foreground uppercase font-bold text-xs">
         Recoveries
       </Text>
-      <Text className="flex-1 uppercase font-bold text-xs text-white text-right">
+      <Text className="flex-1 text-foreground uppercase font-bold text-xs text-right">
         Stamina
       </Text>
     </View>
@@ -159,13 +167,15 @@ const Recoveries = ({ className }: { className?: string }) => {
               className="w-[4px] h-[8px]"
               style={{
                 backgroundColor:
-                  index < recoveries.current ? "#dc2626" : "#6b7280",
+                  index < recoveries.current
+                    ? "var(--recovery)"
+                    : "var(--muted)",
               }}
             />
           );
         })}
       </View>
-      <Text className="font-bold text-white">+{stamina.recovery}</Text>
+      <Text className="text-foreground font-bold">+{stamina.recovery}</Text>
     </View>
   );
 };
@@ -180,7 +190,9 @@ const Stamina = ({ className }: { className?: string }) => {
       <Text className="font-bold text-right text-teal-400">
         {stamina.temporary > 0 ? `(+${stamina.temporary})` : ""}
       </Text>
-      <Text className="font-bold text-right text-white">{stamina.current}</Text>
+      <Text className="text-foreground font-bold text-right">
+        {stamina.current}
+      </Text>
     </View>
   );
 };
@@ -197,13 +209,13 @@ const StaminaBar = ({ className }: { className?: string }) => {
   return (
     <View
       className={
-        "p-2 pb-1 mt-2 border border-gray-500 rounded-lg w-[202px] " + className
+        "p-2 pb-1 mt-2 border border-muted rounded-lg w-[202px] " + className
       }
     >
       <Header />
       <View className="flex-row mt-1 justify-between">
         <Recoveries />
-        <View className="bg-gray-500 w-[1px] mx-2" />
+        <View className="bg-muted w-[1px] mx-2" />
         <Stamina className="flex-1" />
       </View>
       <Bar className="mt-2" />

@@ -18,9 +18,7 @@ export default function HeroSkills() {
     "Mundane clothing, gear, armor, implements, and weapons; meals or drinks at a common tavern; stay at a common inn; passage on a boat";
 
   return (
-    <ScrollView
-      contentContainerClassName="flex flex-col px-2 py-4 gap-6"
-    >
+    <ScrollView contentContainerClassName="flex flex-col px-2 py-4 gap-6">
       <View className="flex flex-row justify-evenly gap-2">
         {Object.entries(characteristics).map((element) => {
           return (
@@ -37,12 +35,12 @@ export default function HeroSkills() {
       <MenuEntry header="Influence" bodyClassName="pt-4 gap-4">
         <View className="flex-row items-start gap-2">
           <StaticDisplay value={wealth} labelBottom="wealth" />
-          <Text className="text-white flex-1">{wealthLabel}</Text>
+          <Text className="flex-1 text-foreground">{wealthLabel}</Text>
         </View>
-        <View className="h-[1px] border-t border-gray-500 w-1/4 self-center border-dotted" />
+        <View className="h-[1px] border-t border-muted w-1/4 self-center border-dotted" />
         <View className="flex-row items-start gap-2">
           <StaticDisplay value={renown} labelBottom="renown" />
-          <Text className="text-white flex-1">
+          <Text className="flex-1 text-foreground">
             Watch captain in a large city, high priest, viscount
           </Text>
         </View>

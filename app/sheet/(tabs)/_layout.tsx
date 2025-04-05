@@ -9,7 +9,13 @@ import React from "react";
 
 export default function SheetLayout() {
   return (
-    <MaterialTopTabs tabBarPosition="bottom"  screenOptions={{sceneStyle: {backgroundColor: "#1f2937"}, tabBarLabelStyle: {fontSize: 12}}}>
+    <MaterialTopTabs
+      tabBarPosition="bottom"
+      screenOptions={{
+        sceneStyle: { backgroundColor: "#1f2937" },
+        tabBarLabelStyle: { fontSize: 12 },
+      }}
+    >
       <MaterialTopTabs.Screen
         name="skills"
         options={{

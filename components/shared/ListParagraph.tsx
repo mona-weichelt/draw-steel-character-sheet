@@ -20,7 +20,7 @@ const ListParagraph = ({
         return (
           <Text
             key={index}
-            className="text-white text-sm"
+            className="text-sm text-foreground"
             style={isEmphasized && { fontWeight: "bold" }}
           >{`${entry}${index < array.length - 1 ? ", " : ""}`}</Text>
         );

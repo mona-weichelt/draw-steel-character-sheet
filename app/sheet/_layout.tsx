@@ -19,7 +19,7 @@ export default function SheetLayout() {
               })
             }
           >
-            <Text className="text-white font-bold">Reset Short</Text>
+            <Text className="font-bold">Reset Short</Text>
           </Pressable>
         </View>
         <View className="flex-1">
@@ -31,12 +31,12 @@ export default function SheetLayout() {
               })
             }
           >
-            <Text className="text-white font-bold">Reset Long</Text>
+            <Text className="font-bold">Reset Long</Text>
           </Pressable>
         </View>
         <View className="flex-1">
           <Pressable
-            className="h-12 items-center justify-center bg-red-600 rounded-lg"
+            className="h-12 items-center justify-center bg-negative rounded-lg"
             onPress={() =>
               dispatch({
                 type: "Take Damage",
@@ -44,19 +44,19 @@ export default function SheetLayout() {
               })
             }
           >
-            <Text className="text-white font-bold">Take Damage</Text>
+            <Text className="font-bold">Take Damage</Text>
           </Pressable>
         </View>
         <View className="flex-1">
           <Pressable
-            className="h-12 items-center justify-center bg-green-600 rounded-lg"
+            className="h-12 items-center justify-center bg-positive rounded-lg"
             onPress={() => dispatch({ type: "Use Recovery" })}
           >
-            <Text className="text-white font-bold">Use Recovery</Text>
+            <Text className="font-bold">Use Recovery</Text>
           </Pressable>
         </View>
       </View>
-      <View className="p-2 border-b bg-gray-800 border-b-gray-500 flex flex-col gap-2">
+      <View className="p-2 bg-base text-foreground border-b border-b-muted flex flex-col gap-2">
         <View className="flex flex-row flex-wrap justify-between">
           <StaticDisplay
             value={
@@ -80,7 +80,7 @@ export default function SheetLayout() {
         </View>
         <StaminaBar className="self-end w-3/4" />
       </View>
-        <Slot screenOptions={{ headerShown: false }} />
+      <Slot screenOptions={{ headerShown: false }} />
     </>
   );
 }

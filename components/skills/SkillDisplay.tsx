@@ -24,7 +24,7 @@ const SkillParagraph = ({
   return (
     <View className={className}>
       {headline && (
-        <Text className="text-white font-bold capitalize">{headline}</Text>
+        <Text className="font-bold text-foreground capitalize">{headline}</Text>
       )}
       <ListParagraph
         entries={skills}
@@ -82,25 +82,29 @@ const SkillDisplay = ({ className }: { className?: string }) => {
         {tests.edge.size > 0 && (
           <ListParagraph
             entries={[...tests.edge].sort()}
-            head={<Text className="text-white font-bold">Edge: </Text>}
+            head={<Text className="font-bold text-foreground">Edge: </Text>}
           />
         )}
         {tests.doubleEdge.size > 0 && (
           <ListParagraph
             entries={[...tests.doubleEdge].sort()}
-            head={<Text className="text-white font-bold">Double Edge: </Text>}
+            head={
+              <Text className="font-bold text-foreground">Double Edge: </Text>
+            }
           />
         )}
         {tests.bane.size > 0 && (
           <ListParagraph
             entries={[...tests.bane].sort()}
-            head={<Text className="text-white font-bold">Bane: </Text>}
+            head={<Text className="font-bold text-foreground">Bane: </Text>}
           />
         )}
         {tests.doubleBane.size > 0 && (
           <ListParagraph
             entries={[...tests.doubleBane].sort()}
-            head={<Text className="text-white font-bold">Double Bane: </Text>}
+            head={
+              <Text className="font-bold text-foreground">Double Bane: </Text>
+            }
           />
         )}
       </MenuEntry>
